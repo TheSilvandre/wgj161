@@ -1,20 +1,10 @@
 ﻿public class InventorySlot {
-
-    private int amount;
-    private Item item;
-
     public InventorySlot(int amount, Item item) {
-        this.amount = amount;
-        this.item = item;
+        Amount = amount;
+        Item = item;
     }
 
-    public int Amount {
-        get => amount;
-        set => amount = value;
-    }
+    public int Amount { get; set; }
 
-    public Item Item {
-        get => item;
-        set => item = value;
-    }
+    public Item Item { get; set; }
 }

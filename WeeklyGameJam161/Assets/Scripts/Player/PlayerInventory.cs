@@ -6,15 +6,38 @@ public class PlayerInventory : MonoBehaviour {
 
     [Header("Stats")]
     [SerializeField] private List<Image> slotsUI = new List<Image>();
+    
+    
 
     private List<InventorySlot> inventorySlots;
     private bool inventoryFull = false;
+    private int selectedSlot;
 
 
     private void Start() {
         inventorySlots = new List<InventorySlot>(slotsUI.Count);
         for(int i = 0; i < inventorySlots.Capacity; i++) {
             inventorySlots.Add(new InventorySlot(0, null));
+        }
+        slotsUI[selectedSlot].color = Color.grey;
+    }
+
+    private void Update() {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0) {
+            slotsUI[selectedSlot].color = Color.white;
+            selectedSlot++;
+            if(selectedSlot >= inventorySlots.Count) {
+                selectedSlot = 0;
+            }
+            slotsUI[selectedSlot].color = Color.grey;
+        } else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
+            slotsUI[selectedSlot].color = Color.white;
+            selectedSlot--;
+            if(selectedSlot < 0) {
+                selectedSlot = inventorySlots.Count - 1;
+            }
+            
+            slotsUI[selectedSlot].color = Color.grey;
         }
     }
 
@@ -40,6 +63,24 @@ public class PlayerInventory : MonoBehaviour {
                 Debug.Log("Added item");
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    public bool UseCurrentItem(Transform clickedObject) {
+        if (inventorySlots[selectedSlot].Amount != 0) {
+            bool used = inventorySlots[selectedSlot].Item.Use(clickedObject);
+
+            if (used) {
+                inventorySlots[selectedSlot].Amount--;
+                if (inventorySlots[selectedSlot].Amount == 0) {
+                    inventorySlots[selectedSlot].Item = null;
+                    slotsUI[selectedSlot].sprite = null;
+                }
+            }
+            
+            return used;
         }
 
         return false;
