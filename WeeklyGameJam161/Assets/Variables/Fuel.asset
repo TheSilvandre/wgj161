@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4045c4a12be6c94f92d2d3d1ab37fdf, type: 3}
   m_Name: Fuel
   m_EditorClassIdentifier: 
-  initialValue: 100
-  value: 100
+  initialValue: 10
+  value: 10

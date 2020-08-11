@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UIElements;
-using Slider = UnityEngine.UI.Slider;
+﻿using TMPro;
+using UnityEngine;
 
 public class FuelController : MonoBehaviour {
 
@@ -9,12 +8,12 @@ public class FuelController : MonoBehaviour {
     [SerializeField] private BoolStorage inVehicle;
 
     [Header("References")]
-    [SerializeField] private Slider slider;
-    [SerializeField] private PlayerInventory inventory;
+    [SerializeField] private TMP_Text fuelCounter;
 
     [Header("Stats")]
     [SerializeField] private float depleteRate;
 
+    
     private void Update() {
         if (inVehicle.value) {
             DepleteFuel();
@@ -23,18 +22,13 @@ public class FuelController : MonoBehaviour {
 
     private void DepleteFuel() {
         fuel.value -= depleteRate * Time.deltaTime;
-        slider.value = fuel.value / 100;
+        fuelCounter.text = fuel.value.ToString("N0");
     }
-
-    private void OnMouseOver() {
-        if (Input.GetMouseButton((int) MouseButton.LeftMouse)) {
-            inventory.UseCurrentItem(transform);
-        }
-    }
-
+    
     public void AddFuel(float fuelValue) {
         fuel.value += fuelValue;
         if (fuel.value > 100) fuel.value = 100;
-        slider.value = fuel.value / 100;
+        fuelCounter.text = fuel.value.ToString("N0");
     }
+    
 }

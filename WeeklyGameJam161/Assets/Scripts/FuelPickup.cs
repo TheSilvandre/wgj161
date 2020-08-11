@@ -1,55 +1,27 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
-public class FuelPickup : MonoBehaviour, IInteractable {
+public class FuelPickup : Interactable {
 
     [Header("References")]
     [SerializeField] private PlayerInventory playerInventory;
     [SerializeField] private Item item;
-    [SerializeField] private GameObject interactTextPrefab;
-    [SerializeField] private Canvas canvas;
 
-    [Header("Stats")]
-    [SerializeField] private float upShiftText = 0.8f;    // TODO find better name for this variable
+    //[Header("Stats")]
 
     private bool canPickup;
-    private Camera camera;
-    private TMP_Text text;
+    
 
-
-    private void Start() {
-        camera = Camera.main;
+    protected override void OnHover() {
+        hoverText.enabled = true;
+        hoverText.SetText("Pickup");
     }
 
-    public void Interact() {
+    protected override void OnInteract() {
         bool itemAdded = playerInventory.AddItem(item);
         if (itemAdded) {
-            Destroy(text.gameObject);
+            Destroy(hoverText.gameObject);
             Destroy(gameObject);
         }
-    }
-
-    private void OnMouseEnter() {
-        // Enable UI
-        if (text == null) {
-            GameObject interactText = Instantiate(interactTextPrefab, canvas.transform);
-            text = interactText.GetComponent<TMP_Text>();
-        }
-
-        text.gameObject.SetActive(true);
-    }
-
-    private void OnMouseOver() {
-        text.rectTransform.position = camera.WorldToScreenPoint(transform.position + Vector3.up * upShiftText);
-        if (Input.GetMouseButton((int) MouseButton.LeftMouse) && canPickup) {
-            Interact();
-        }
-    }
-
-    private void OnMouseExit() {
-        // Disable UI
-        text.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -63,5 +35,4 @@ public class FuelPickup : MonoBehaviour, IInteractable {
             canPickup = false;
         }
     }
-    
 }

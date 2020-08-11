@@ -30,18 +30,19 @@ public class PlayerInventory : MonoBehaviour {
                 selectedSlot = 0;
             }
             slotsUI[selectedSlot].color = Color.grey;
+            
         } else if (Input.GetAxis("Mouse ScrollWheel") < 0) {
             slotsUI[selectedSlot].color = Color.white;
             selectedSlot--;
-            if(selectedSlot < 0) {
+            if (selectedSlot < 0) {
                 selectedSlot = inventorySlots.Count - 1;
             }
-            
+
             slotsUI[selectedSlot].color = Color.grey;
+            
         }
     }
-
-
+    
     public bool AddItem(Item item) {
         Debug.Log("Trying to add item");
         for (int i = 0; i < inventorySlots.Count; i++) {
@@ -49,6 +50,7 @@ public class PlayerInventory : MonoBehaviour {
             if (slot.Amount != 0 && slot.Item == item) {
                 slot.Amount += 1;
                 slotsUI[i].sprite = item.icon;
+                slotsUI[i].enabled = true;
                 Debug.Log("Added item to existing stack");
                 return true;
             }
@@ -60,6 +62,7 @@ public class PlayerInventory : MonoBehaviour {
                 slot.Item = item;
                 slot.Amount = 1;
                 slotsUI[i].sprite = item.icon;
+                slotsUI[i].enabled = true;
                 Debug.Log("Added item");
                 return true;
             }
@@ -68,22 +71,42 @@ public class PlayerInventory : MonoBehaviour {
         return false;
     }
 
-    public bool UseCurrentItem(Transform clickedObject) {
-        if (inventorySlots[selectedSlot].Amount != 0) {
-            bool used = inventorySlots[selectedSlot].Item.Use(clickedObject);
+    public void RemoveCurrentItem(int amount) {
 
-            if (used) {
-                inventorySlots[selectedSlot].Amount--;
-                if (inventorySlots[selectedSlot].Amount == 0) {
-                    inventorySlots[selectedSlot].Item = null;
-                    slotsUI[selectedSlot].sprite = null;
-                }
+        InventorySlot slot = inventorySlots[selectedSlot];
+
+        if(slot.Amount >= amount) {
+            slot.Amount -= amount;
+            if (slot.Amount <= 0) {
+                slot.Item = null;
+                slot.Amount = 0;
+                slotsUI[selectedSlot].sprite = null;
+                slotsUI[selectedSlot].enabled = false;
             }
-            
-            return used;
         }
+    }
+    
+//    public bool UseCurrentItem(Transform clickedObject) {
+//        if (inventorySlots[selectedSlot].Amount != 0) {
+//            bool used = inventorySlots[selectedSlot].Item.Use(clickedObject);
+//
+//            if (used) {
+//                inventorySlots[selectedSlot].Amount--;
+//                if (inventorySlots[selectedSlot].Amount == 0) {
+//                    inventorySlots[selectedSlot].Item = null;
+//                    slotsUI[selectedSlot].sprite = null;
+//                    slotsUI[selectedSlot].enabled = false;
+//                }
+//            }
+//            
+//            return used;
+//        }
+//
+//        return false;
+//    }
 
-        return false;
+    public Item GetCurrentItem() {
+        return inventorySlots[selectedSlot].Item;
     }
     
 }
