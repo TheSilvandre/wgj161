@@ -16,6 +16,7 @@
             <e p="BalloonController.cs" t="Include" />
             <e p="FuelController.cs" t="Include" />
           </e>
+          <e p="CrystalPickup.cs" t="Include" />
           <e p="FuelPickup.cs" t="Include" />
           <e p="Interactable.cs" t="Include" />
           <e p="MainMenu" t="Include">

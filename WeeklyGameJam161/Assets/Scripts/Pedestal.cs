@@ -7,9 +7,13 @@ public class Pedestal : Interactable {
     [Header("References")]
     [SerializeField] private PlayerInventory inventory;
     [SerializeField] private Item slottableItem;
+    [SerializeField] private Pedestal nextPedestal;
+
+    [Header("Stats")]
+    [SerializeField] private Vector2 nextPedestalDir;
+    [SerializeField] private Vector2 currentPedestalDir;
     
-    //[Header("Stats")]
-    
+    private bool ready;
     private bool slotted;
     
     
@@ -25,13 +29,22 @@ public class Pedestal : Interactable {
     }
 
     protected override void OnInteract() {
-        if (inventory.GetCurrentItem() == slottableItem) {
+        if (inventory.GetCurrentItem() == slottableItem && ! slotted) {
             slotted = true;
-                
-            // Handle insert logic
+            ready = true;
+            
             // Remove item from inventory
             inventory.RemoveCurrentItem(1);
             hoverText.enabled = false;
+            // TODO update sprite
+        } else if (slotted) {
+            // TODO Rotate mirror sprite
+            currentPedestalDir = new Vector2(-currentPedestalDir.y, currentPedestalDir.x);
+            nextPedestal.SetReady(currentPedestalDir == nextPedestalDir);
         }
+    }
+
+    private void SetReady(bool value) {
+        ready = value;
     }
 }
