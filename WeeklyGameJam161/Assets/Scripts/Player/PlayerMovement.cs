@@ -2,15 +2,18 @@
 
 public class PlayerMovement : MonoBehaviour {
 
-    private Rigidbody2D body;
+    [SerializeField] private BoolStorage inVehicle;
 
+    [SerializeField] private Animator animator;
+    
+    public float runSpeed = 20.0f;
+    
+    private Rigidbody2D body;
     private float horizontal;
     private float vertical;
     private float moveLimiter = 0.7f;
-
-    [SerializeField] private BoolStorage inVehicle;
-    public float runSpeed = 20.0f;
-
+    
+    
     private void Start () {
         body = GetComponent<Rigidbody2D>();
     }
@@ -18,7 +21,9 @@ public class PlayerMovement : MonoBehaviour {
     private void Update() {
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
+        animator.SetFloat("Horizontal", horizontal);
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
+        animator.SetFloat("Vertical", vertical);
     }
 
     private void FixedUpdate() {

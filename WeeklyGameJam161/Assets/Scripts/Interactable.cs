@@ -4,6 +4,9 @@ using UnityEngine.UIElements;
 
 public abstract class Interactable : MonoBehaviour {
     
+    [Header("Variables")]
+    [SerializeField] private BoolStorage isPaused;
+    
     [Header("References")]
     [SerializeField] private GameObject textPrefab;
     [SerializeField] private Canvas canvas;
@@ -28,14 +31,18 @@ public abstract class Interactable : MonoBehaviour {
     
     private void OnMouseEnter() {
         InstantiateInteractionText();
-        OnHover();
+        if (!isPaused.value) {
+            OnHover();
+        }
     }
 
     private void OnMouseOver() {
-        hoverText.rectTransform.position = cam.WorldToScreenPoint(transform.position + Vector3.up * upShiftText);
+        if (!isPaused.value) {
+            hoverText.rectTransform.position = cam.WorldToScreenPoint(transform.position + Vector3.up * upShiftText);
         
-        if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse)) {
-            OnInteract();
+            if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse)) {
+                OnInteract();
+            }
         }
     }
 

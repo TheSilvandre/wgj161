@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,8 @@ public class PlayerInventory : MonoBehaviour {
 
     [Header("Stats")]
     [SerializeField] private List<Image> slotsUI = new List<Image>();
+    [SerializeField] private TMP_Text[] amountText;
+    
     
     
 
@@ -51,6 +54,8 @@ public class PlayerInventory : MonoBehaviour {
                 slot.Amount += 1;
                 slotsUI[i].sprite = item.icon;
                 slotsUI[i].enabled = true;
+                amountText[i].enabled = true;
+                amountText[i].SetText(slot.Amount.ToString());
                 Debug.Log("Added item to existing stack");
                 return true;
             }
@@ -63,6 +68,8 @@ public class PlayerInventory : MonoBehaviour {
                 slot.Amount = 1;
                 slotsUI[i].sprite = item.icon;
                 slotsUI[i].enabled = true;
+                amountText[i].enabled = true;
+                amountText[i].SetText(slot.Amount.ToString());
                 Debug.Log("Added item");
                 return true;
             }
@@ -77,11 +84,13 @@ public class PlayerInventory : MonoBehaviour {
 
         if(slot.Amount >= amount) {
             slot.Amount -= amount;
+            amountText[selectedSlot].SetText(slot.Amount.ToString());
             if (slot.Amount <= 0) {
                 slot.Item = null;
                 slot.Amount = 0;
                 slotsUI[selectedSlot].sprite = null;
                 slotsUI[selectedSlot].enabled = false;
+                amountText[selectedSlot].enabled = false;
             }
         }
     }

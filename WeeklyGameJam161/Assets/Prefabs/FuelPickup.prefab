@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2109107391711228870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2109107393466164705}
   m_RootOrder: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: b899ce79d080cfa459ad79bfbf8b3940, type: 3}
+  m_Sprite: {fileID: 4730907938173302739, guid: af1e3fad544e4b649b94f062c2966f3a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,7 +130,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2
 --- !u!114 &2109107393466164711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,5 +146,6 @@ MonoBehaviour:
   textPrefab: {fileID: 1666698542086098200, guid: 835620e34bb99a949a5cf6233200ea0a, type: 3}
   canvas: {fileID: 0}
   upShiftText: 0.8
+  isPaused: {fileID: 11400000, guid: 5b345cd885693f947bb212f4611f0766, type: 2}
   playerInventory: {fileID: 0}
   item: {fileID: 11400000, guid: ff61840b095a9844dbead7fc839ef077, type: 2}

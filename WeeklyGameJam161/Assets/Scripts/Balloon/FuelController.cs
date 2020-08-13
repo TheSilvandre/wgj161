@@ -22,13 +22,13 @@ public class FuelController : MonoBehaviour {
 
     private void DepleteFuel() {
         fuel.value -= depleteRate * Time.deltaTime;
-        fuelCounter.text = fuel.value.ToString("N0");
+        fuelCounter.SetText(fuel.value.ToString("N0"));
     }
     
     public void AddFuel(float fuelValue) {
         fuel.value += fuelValue;
         if (fuel.value > 100) fuel.value = 100;
-        fuelCounter.text = fuel.value.ToString("N0");
+        fuelCounter.SetText(fuel.value.ToString("N0"));
     }
     
 }

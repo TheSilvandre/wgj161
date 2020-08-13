@@ -14,13 +14,16 @@ public class FuelPickup : Interactable {
     protected override void OnHover() {
         hoverText.enabled = true;
         hoverText.SetText("Pickup");
+        
     }
 
     protected override void OnInteract() {
-        bool itemAdded = playerInventory.AddItem(item);
-        if (itemAdded) {
-            Destroy(hoverText.gameObject);
-            Destroy(gameObject);
+        if (canPickup) {
+            bool itemAdded = playerInventory.AddItem(item);
+            if (itemAdded) {
+                Destroy(hoverText.gameObject);
+                Destroy(gameObject);
+            }
         }
     }
 

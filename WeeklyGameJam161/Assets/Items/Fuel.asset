@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad96691b5f68a344ab28326603bdd056, type: 3}
   m_Name: Fuel
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: b899ce79d080cfa459ad79bfbf8b3940, type: 3}
+  icon: {fileID: 4730907938173302739, guid: af1e3fad544e4b649b94f062c2966f3a, type: 3}
   name: stick
   fuelValue: 1

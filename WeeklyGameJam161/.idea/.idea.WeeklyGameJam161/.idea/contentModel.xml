@@ -16,15 +16,16 @@
             <e p="BalloonController.cs" t="Include" />
             <e p="FuelController.cs" t="Include" />
           </e>
+          <e p="Crypt.cs" t="Include" />
           <e p="CrystalPickup.cs" t="Include" />
+          <e p="FoodSource.cs" t="Include" />
           <e p="FuelPickup.cs" t="Include" />
           <e p="Interactable.cs" t="Include" />
-          <e p="MainMenu" t="Include">
-            <e p="PlayButton.cs" t="Include" />
-          </e>
+          <e p="MainMenu.cs" t="Include" />
           <e p="PauseMenu.cs" t="Include" />
           <e p="Pedestal.cs" t="Include" />
           <e p="Player" t="Include">
+            <e p="FoodObject.cs" t="Include" />
             <e p="FuelObject.cs" t="Include" />
             <e p="Health.cs" t="Include" />
             <e p="Hunger.cs" t="Include" />
